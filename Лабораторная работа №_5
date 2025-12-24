@@ -1,1 +1,54 @@
+Лабораторная работа 5. Триггеры и аудит
 
+Цель: Реализация бизнес-логики на уровне БД и системы аудита.
+
+Выполненные задания:
+
+
+
+1.Создание таблицы аудита
+CREATE TABLE popovdenis2271.group_audit_log (
+    operation text NOT NULL,
+    stamp timestamp NOT NULL,
+    gid int,
+    gname text,
+    gquantity int,
+    gdirection text
+);
+
+
+
+2.Функция для аудита изменений
+--Триггер аудита изменений (INSERT, DELETE, UPDATE)
+CREATE OR REPLACE FUNCTION popovdenis2271.log_group_changes() RETURNS TRIGGER AS
+$$
+BEGIN
+  IF (TG_OP = 'DELETE') THEN
+    INSERT INTO popovdenis2271.group_audit_log SELECT 'Delete', now(), OLD.*;
+  ELSIF (TG_OP = 'UPDATE') THEN
+    INSERT INTO popovdenis2271.group_audit_log SELECT 'Update', now(), OLD.*;
+  ELSIF (TG_OP = 'INSERT') THEN
+    INSERT INTO popovdenis2271.group_audit_log SELECT 'Insert', now(), NEW.*;
+  END IF;
+  RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+3.Триггер каскадного удаления
+CREATE OR REPLACE TRIGGER group_audit_trigger
+AFTER INSERT OR UPDATE OR DELETE ON popovdenis2271.group
+FOR EACH ROW EXECUTE FUNCTION popovdenis2271.log_group_changes();
+
+CREATE OR REPLACE FUNCTION popovdenis2271.cascade_delete_group_students() RETURNS TRIGGER AS
+$$
+BEGIN
+  DELETE FROM popovdenis2271.student WHERE group_id = OLD.id;
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER group_cascade_delete_trigger
+BEFORE DELETE ON popovdenis2271.group
+FOR EACH ROW EXECUTE FUNCTION popovdenis2271.cascade_delete_group_students();
