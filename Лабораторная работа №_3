@@ -1,1 +1,26 @@
+Лабораторная работа 3. Представления и процедуры Цель: Освоение механизмов абстракции данных и программных модулей.
 
+Выполненные задания:
+
+
+
+1. Создание/выполнение представления
+
+
+
+2. Создание/выполнение хранимой процедуры с параметром
+CREATE OR REPLACE PROCEDURE popovdenis2271.add_new_student(
+a_name varchar(50), 
+a_hair text, a_group_id bigint, a_audience_id bigint, 
+a_father_salary integer, a_mother_salary integer, a_family_members integer)
+LANGUAGE SQL
+AS $$
+	INSERT INTO popovdenis2271.student ("name", "hair", "group_id", "audience_id", "father_salary", "mother_salary", "family_members")
+	VALUES (a_name, a_hair, a_group_id, a_audience_id, a_father_salary, a_mother_salary, a_family_members);
+$$;
+
+
+
+3. Тестирование процедуры
+CALL popovdenis2271.add_new_student(
+',ml5ml;kj', 'dwdwd', 1, 3, 300, 2323, 4)
