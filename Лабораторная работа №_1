@@ -35,8 +35,8 @@
 - PK student_id (int)
 - name (string)
 - hair (string)
-- group_id (int) 
-- audience_id (int) 
+- FK group_id (int) 
+- FK audience_id (int) 
 - father_salary (int)
 - mother_salary (int)
 - family_members (int) 
@@ -45,6 +45,6 @@
 - PK curator_id (int)
 - name (string)
 - age (int)
-- audience_id (int) 
+- FK audience_id (int) 
 
 **Пояснение:** Разработана структура из 6 таблиц, связанных между собой, что соответствует требованиям 3-5 таблиц. Связи между таблицами обеспечивают нормализацию до 3NF.
