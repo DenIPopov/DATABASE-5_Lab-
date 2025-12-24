@@ -1,0 +1,50 @@
+# Лабораторная работа 1. Проектирование структуры БД
+
+**Цель:** Спроектировать структуру базы данных, соответствующую бизнес-требованиям и нормализованную до 3NF.
+
+## Требования:
+- 3-5 таблиц в базе данных
+- Нормализация до третьей нормальной формы
+
+## Спроектированные таблицы:
+
+### rector 
+- PK rector_id (int)
+- name (string)
+- hobby (string)
+- age (int) 
+
+### university 
+- PK university_id (int)
+- name (string)
+- adress (string)
+
+### audience 
+- PK audience_id (int)
+- number (int)
+- floor (int)
+- purpose (string) 
+
+### group
+- PK group_id (int)
+- name (string)
+- quantity (int)
+- direction (string) 
+
+### student 
+- PK student_id (int)
+- name (string)
+- hair (string)
+- group_id (int) 
+- audience_id (int) 
+- father_salary (int)
+- mother_salary (int)
+- family_members (int) 
+
+### curator
+- PK curator_id (int)
+- name (string)
+- age (int)
+- audience_id (int) 
+
+**Пояснение:** Разработана структура из 4 таблиц, связанных между собой, что соответствует требованиям 3-5 таблиц. Связи между таблицами обеспечивают нормализацию до 3NF.
