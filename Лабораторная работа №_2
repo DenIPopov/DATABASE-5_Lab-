@@ -1,1 +1,25 @@
+Лабораторная работа 2. Инсталляция БД на сервере
 
+**Цель:** Практическое развертывание базы данных и работа с SQL.
+
+## Выполненные задания:
+
+
+
+### 1. SELECT-запрос с JOIN нескольких таблиц
+--Создано представление с SELECT-запрос с JOIN с использованием 3-ёх таблиц (student, group и audience). Она показывает список студентов с их группами и аудиториями.
+SELECT 
+    s.id,
+    s.name AS student_name,
+    s.hair,
+    g.id,
+    g.name AS group_name,
+    g.direction,
+    a.id,
+    a.number AS audience_number,
+    a.floor,
+    a.purpose AS audience_purpose
+FROM popovdenis2271.student s
+JOIN popovdenis2271.group g ON s.group_id = g.id
+LEFT JOIN popovdenis2271.audience a ON s.audience_id = a.id
+ORDER BY s.id;
