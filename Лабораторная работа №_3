@@ -5,6 +5,22 @@
 
 
 1. Создание/выполнение представления
+--Созданное представление, которое показывает количество групп и аудиторий.
+CREATE OR REPLACE VIEW student_group_audience_1 AS 
+SELECT 
+    s.id,
+    s.name AS student_name,
+    s.group_id,
+    g.name AS group_name,
+    s.audience_id,
+    a.number AS audience_number,
+    a.floor,
+    a.purpose
+FROM popovdenis2271.student s
+JOIN popovdenis2271.group g ON s.group_id = g.id
+LEFT JOIN popovdenis2271.audience a ON s.audience_id = a.id;
+
+SELECT * FROM student_group_audience_1; --Проверка представления. Что оно выводит.
 
 
 
